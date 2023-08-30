@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   const toggleData = async () => {
-    const newLanguage = data.language === 'en' ? 'es' : 'en';
+    const newLanguage = data.language === 'en' ? 'bn' : 'en';
     const newTheme = data.theme === 'light' ? 'dark' : 'light';
 
     const response = await fetch('/api/cookie', {
@@ -34,15 +34,15 @@ export default function Home() {
     setData(result);
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold text-center">Welcome to the Cookie App</h1>
-      <div>
-        <div>
-          <p>Language: {data.language}</p>
-          <p>Theme: {data.theme}</p>
+      <main className="flex min-h-screen flex-col items-center justify-center p-24">
+        <h1 className="text-4xl font-bold text-center mb-8">Welcome to the Cookie App</h1>
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <div className="bg-gray-100 p-5 rounded-md shadow-md space-y-2">
+            <p className="text-xl font-semibold">Language: {data.language}</p>
+            <p className="text-xl font-semibold">Theme: {data.theme}</p>
+          </div>
+          <button onClick={toggleData} className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition duration-300">Toggle Data</button>
         </div>
-        <button onClick={toggleData}>Toggle Data</button>
-      </div>
-    </main>
+      </main>
   )
 }
