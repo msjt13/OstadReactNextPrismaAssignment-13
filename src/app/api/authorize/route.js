@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
-export function handler(req) {
+export function GET(req) {
 
-    const header_data = headers();
-    const authHeader = header_data.get('Authorization');
+    const token = headers().get('Authorization');
+    console.log('token', token);
 
-    if (authHeader) {
-        req.headers['Authorization'] = 'Bearer ' + authHeader;
-    }
-    return NextResponse.next();
+    return NextResponse.json({
+        token: token
+    })
 }

@@ -3,21 +3,23 @@ import { NextResponse } from "next/server";
 
 //Set Cookies
 export async function POST(req, res) {
-    const json_data = await req.json();
 
-    const language = json_data["language"];
-    const theme = json_data["theme"];
+    const json_data = await req.json();
+    console.log('json data', json_data);
+
+    const language = json_data["language"] || 'en';
+    const theme = json_data["theme"] || 'light';
 
     return NextResponse.json(
         {
-            message: "Cookie Set!",
-            lang: language,
+            message: "Cookie Set Successful!",
+            language: language,
             theme: theme,
         },
         {
             status: 200,
             headers: {
-                "Set-Cookie": `lang=${language}, theme=${theme}, path=/`,
+                "Set-Cookie": `language=${language}, theme=${theme}, path=/`,
             },
         }
     );
@@ -26,11 +28,11 @@ export async function POST(req, res) {
 //Get Cookies
 export async function GET(req, res) {
 
-    const language = req.cookies.get("language")?.value
-    const theme = req.cookies.get("theme")?.value
+    const language = req.cookies.get("language")?.value || "en"
+    const theme = req.cookies.get("theme")?.value || "light"
 
     return NextResponse.json({
-        lang:language,
+        language:language,
         theme:theme
     })
 }
