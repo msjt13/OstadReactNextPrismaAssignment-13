@@ -10,14 +10,14 @@ export function middleware(req) {
         const token = reqHeaders.get('Authorization');
         console.log('middleware token', token);
 
-        // const response = NextResponse.next();
-        // response.headers.set('Authorization', "Bearer "+token);
-        // return response;
+        const response = NextResponse.next();
+        response.headers.set('Authorization', "Bearer "+token);
+        return response;
 
-        reqHeaders.set('Authorization', "Bearer "+token);
-        return  NextResponse.next({
-            request: {headers: reqHeaders},
-        })
+        // reqHeaders.set('Authorization', "Bearer "+token);
+        // return  NextResponse.next({
+        //     request: {headers: reqHeaders},
+        // })
     }
 
     return NextResponse.next();
